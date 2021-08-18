@@ -15,5 +15,4 @@ def scan(ip):
     answered_list, unanswered_list = scapy.srp(arp_request_broadcast, timeout=1)
     print(answered_list.summary())
 
-
 scan("10.0.2.1/24")
