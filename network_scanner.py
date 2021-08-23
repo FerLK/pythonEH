@@ -1,4 +1,15 @@
 import scapy.all as scapy
+import subprocess
+import optparse
+import re
+
+def get_arguments():
+    parser = optparse.OptionParser()
+    parser.add_option("-t", "--target", dest = "target", help = "IP target")
+    (options,arguments) = parser.parse_args()
+    if not options.target:
+        parser.error("[-] Pls, specify a IP")
+    return options
 
 def scan(ip):
     # to see the fields inside de obj,looking for ip:
@@ -31,5 +42,10 @@ def print_result(results_list):
     for client in results_list:
         print(client["ip"] + "\t\t" + client["mac"])
 
-scan_result = scan("10.0.2.1/24")
+
+options = get_arguments()
+scan_result = scan(options.target)
 print_result(scan_result)
+
+# scan_result = scan("10.0.2.1/24")
+# print_result(scan_result)
